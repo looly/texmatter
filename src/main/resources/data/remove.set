@@ -1,0 +1,32 @@
+#------------------------------------------------------------
+# HTML标签去除集合
+# Author Looly
+#------------------------------------------------------------
+
+# 需要去除的HTML标签属性
+[html_attr_remove]
+style
+
+# 需要去除的HTML标签以及内容
+[html_remove]
+iframe
+style
+script
+
+# 需要只去除标签而保留内容的标签
+[html_unwrap]
+strong
+ins
+em
+u
+font
+span
+center
+h1
+h2
+h3
+h4
+plucida
+
+#在全角转半角中不需要转为半角的字符
+[dbc_not_convert]

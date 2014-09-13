@@ -1,0 +1,18 @@
+        [视频1]<br />     AA跟在视频标签之后的文本
+[视频2]<br /><br /><br /><br />&nbsp;      
+<p>第一段文本</p>&nbsp;
+紧随P标签之后的文本
+<br/>
+<br/>
+<br/>
+紧随br标签之后的文本
+<br/>
+<p>中文中 间 的&nbsp;空格   12 &nbsp;  3</p><br>
+
+
+<p><a href="url with weixin">微信链接</a>普通文本</p>
+<p><a href="url with weibo">微博链接</a>普通文本</p>
+
+乱码字符：          
+
+<iframe width="120"></iframe>
