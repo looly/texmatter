@@ -15,8 +15,7 @@ public class BlankHandler implements Handler {
 	public String handle(String text) {
 		text = removeNbspBetweenChineseOrNumber(text);
 		text = removeBlankLine(text);
-		text = removeBlankAroundP(text);
-		
+
 		return text;
 	}
 
@@ -42,18 +41,6 @@ public class BlankHandler implements Handler {
 				.append("|") // 或
 				.append(StrUtil.format("{}<p[^>]*>{}</p>{}", Constant.RE_BLANKS, Constant.RE_BLANKS, Constant.RE_BLANKS));// <p></p>空行
 		return text.replaceAll(builder.toString(), StrUtil.EMPTY);
-	}
-	
-	/**
-	 * 去除段落结束标签周围的换行、空格符
-	 * @param text 文本
-	 * @return 处理后的文本
-	 */
-	public static String removeBlankAroundP(String text) {
-		text = text.replaceAll(StrUtil.format("(?i){}</p>{}", Constant.RE_BLANK_BRS, Constant.RE_BLANK_BRS), "</p>");
-		text = text.replaceAll(StrUtil.format("(?i){}<p[^>]*>{}", Constant.RE_BLANK_BRS, Constant.RE_BLANK_BRS), "\n<p>");
-		
-		return text;
 	}
 	
 	/**

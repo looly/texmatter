@@ -13,6 +13,7 @@ public class ParagraphHandler implements Handler{
 	@Override
 	public String handle(String text) {
 		text = divAsP(text);
+		text = trimP(text);
 		text = addWhiteSpace(text);
 		return text;
 	}
@@ -23,8 +24,20 @@ public class ParagraphHandler implements Handler{
 	 * @return 处理后的文本
 	 */
 	public static String divAsP(String text) {
-		text = text.replaceAll("(?i)<div[^>]*?>", "<p>");
+		text = text.replaceAll("(?i)<div[^>]*?>", "\n<p>");
 		text = text.replaceAll("(?i)</div>", "</p>");
+		
+		return text;
+	}
+	
+	/**
+	 * 去除段落结束标签周围的换行、空格符
+	 * @param text 文本
+	 * @return 处理后的文本
+	 */
+	public static String trimP(String text) {
+		text = text.replaceAll(StrUtil.format("(?i){}</p>{}", Constant.RE_BLANK_BRS, Constant.RE_BLANK_BRS), "</p>");
+		text = text.replaceAll(StrUtil.format("(?i){}<p[^>]*>{}", Constant.RE_BLANK_BRS, Constant.RE_BLANK_BRS), "\n<p>");
 		
 		return text;
 	}
@@ -43,7 +56,7 @@ public class ParagraphHandler implements Handler{
 		//在br标签的之后加空格，同时解决多个br问题
 		text = text.replaceAll(StrUtil.format("(?i)<br[^>]*>{}", Constant.RE_BLANK_BRS), "<br/>\n" + Constant.NBSP_P);
 		//在P之后的非标签文本理解为独立段落
-		text = text.replaceAll(StrUtil.format("(?i)</p>{}(?!<p|<br|$)", Constant.RE_BLANKS), "</p>\n" + Constant.NBSP_P);
+		text = text.replaceAll(StrUtil.format("(?i)</p>(?!<p|<br|$|\\s)"), "</p>\n" + Constant.NBSP_P);
 		return text;
 	}
 }
