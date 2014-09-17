@@ -58,7 +58,7 @@ public class SpecialHandler implements Handler{
 	 * @return 处理后的文本
 	 */
 	public static String nbspAfterVideoFlag(String text) {
-		final String regex = StrUtil.format("(?i)(?<={})\\s(?!<p)", Constant.RE_VIDEO_FLAG);
+		final String regex = StrUtil.format("(?i)(?<={})\\s(?!</?p)", Constant.RE_VIDEO_FLAG);
 		return text.replaceAll(regex, "\n" + Constant.NBSP_P);
 	}
 	
