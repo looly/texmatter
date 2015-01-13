@@ -49,9 +49,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		FullHttpResponse response = buildOkResponse("text/plain", "中文你好！");
 		
 		if (false == HttpHeaders.isKeepAlive(request)) {
-			log.debug("Use keepalive");
 			ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 		} else {
+			log.debug("Use keep alive");
 			response.headers().set(Names.CONNECTION, Values.KEEP_ALIVE);
 			ctx.write(response);
 		}
