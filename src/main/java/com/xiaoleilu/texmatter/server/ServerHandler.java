@@ -46,14 +46,17 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 			ctx.write(new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.CONTINUE));
 		}
 		
+		//提取HttpRequest参数
+		log.debug("uri: " + request.getUri());
+		
 		FullHttpResponse response = buildOkResponse("text/plain", "中文你好！");
 		
-		if (false == HttpHeaders.isKeepAlive(request)) {
-			ctx.write(response).addListener(ChannelFutureListener.CLOSE);
-		} else {
+		if (HttpHeaders.isKeepAlive(request)) {
 			log.debug("Use keep alive");
 			response.headers().set(Names.CONNECTION, Values.KEEP_ALIVE);
 			ctx.write(response);
+		} else {
+			ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 		}
 	}
 	
